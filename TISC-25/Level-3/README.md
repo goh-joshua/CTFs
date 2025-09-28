@@ -251,10 +251,10 @@ def binary(num):
     return ''.join('{:0>8b}'.format(c) for c in struct.pack('!f', num))
 
 for i in range(len(l)):
-    x = binary(float(l[i]))[-23:]
-    a = chr(int("0" + x[:7],2))
+    x = binary(float(l[i]))
+    a = chr(int(x[8:16],2))
     b = chr(int(x[-8:],2))
-    l[i] = "".join([b, a])
+    l[i] = "".join([b, a]) #if a and b were not swapped, the resulting text makes it look like they should have been swapped
 
 print("".join(l))
 ```
