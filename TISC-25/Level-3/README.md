@@ -1,4 +1,4 @@
-# Rotary Precision
+# Level-3 - Rotary Precision
 DESCRIPTION
 
 We've recovered a file from an SD card. It seems important, can you find the hidden content?
@@ -130,7 +130,7 @@ These instructions were repeated multiple times but make no sense as the number 
 
 Forgetting that I had learned about IEEE numbers in CS2100, I googled the numbers and found out what they were.
 
-Since IEEE is 32 bits and the first 8 bits and third 8 bits are always 0, clearly the second 8 bits and fourth 8 bits represent letters.
+Since IEEE is 32 bits and all the numbers used in the text always had 0s in their first and third 8 bits, clearly the second and fourth 8 bits represent letters.
 
 ```
 text = """G0 X7.989824091696275e-39 Y9.275539254788188e-39
