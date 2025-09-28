@@ -275,7 +275,7 @@ def rot_rot(plain, key):
         return cipher
 ```
 
-And this is just a rot cipher so you run more code!
+And this is just a rotating rot cipher so you run more code and bruteforce the flag!
 
 ```
 ct = "aWnegWRi18LwQXnXgxqEF}blhs6G2cVU_hOz3BEM2{fjTb4BI4VEovv8kISWcks4"
