@@ -22,7 +22,15 @@ geoint.png
 
 ![The Lake](./geoint.png)
 
+So we are given the image above.
 
+So you just right click and Google Lens.
+
+And if the search alogrithm favours you, a [pdf](https://www.ykrasi.org/wp-content/uploads/2021/04/Waterbird-Population-Dynamics-Kukila-2014-2-min-2.pdf) containing the image will be found. 
+
+Using my mouse and scroll wheel, I found out that the lake in the picture was the Melintang Lake in Indonesia.
+
+So with my keyboard, I generated the flag.
 
 
 
