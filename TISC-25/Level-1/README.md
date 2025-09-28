@@ -24,7 +24,8 @@ geoint.png
 
 So we are given the image above.
 
-So you just right click and Google Lens.
+So you just right click and <img width="169" height="30" alt="image" src="https://github.com/user-attachments/assets/73598fb9-8531-4540-a18b-3d08f2955f0f" />.
+
 
 And if the search alogrithm favours you, a [pdf](https://www.ykrasi.org/wp-content/uploads/2021/04/Waterbird-Population-Dynamics-Kukila-2014-2-min-2.pdf) containing the image will be found. 
 
@@ -32,6 +33,4 @@ Using my mouse and scroll wheel, I found out that the lake in the picture was th
 
 So with my keyboard, I generated the flag.
 
-
-
-
+Flag: tisc{lake_melintang}
