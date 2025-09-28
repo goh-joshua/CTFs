@@ -24,8 +24,7 @@ geoint.png
 
 So we are given the image above.
 
-So you just right click and <img width="169" height="30" alt="image" src="https://github.com/user-attachments/assets/73598fb9-8531-4540-a18b-3d08f2955f0f" />.
-
+<p> So you just right click and <img width="169" height="30" alt="image" src="https://github.com/user-attachments/assets/73598fb9-8531-4540-a18b-3d08f2955f0f" style="vertical-align: middle;" /> . </p>
 
 And if the search alogrithm favours you, a [pdf](https://www.ykrasi.org/wp-content/uploads/2021/04/Waterbird-Population-Dynamics-Kukila-2014-2-min-2.pdf) containing the image will be found. 
 
