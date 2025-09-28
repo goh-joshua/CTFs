@@ -1,4 +1,4 @@
-# The Spectrecular Bot
+# Level-2 - The Spectrecular Bot
 DESCRIPTION
 
 Just before the rise of SPECTRE, our agents uncovered a few rogue instances of a bot running at http://chals.tisc25.ctf.sg:38163, http://chals.tisc25.ctf.sg:38164 and http://chals.tisc25.ctf.sg:38165. These instances were found to be running the identical services of the bot.
