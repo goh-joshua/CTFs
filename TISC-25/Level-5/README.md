@@ -149,7 +149,7 @@ Yep I had no idea how to read this. But I know someone who does :).
 
 After multiple hallucinations, wrong payloads and giving it what it wanted, it crafted a payload script for me :)
 
-```
+```python
 import struct
 
 # Baseline sequence (Type, Value)
@@ -187,4 +187,4 @@ And I got the correct mp3 where the flag was spelled out letter by letter.
 
 FLAG: TISC{PR3551NG_BUTT0N5_4ND_TURN1NG_KN0B5_4_S3CR3T_S0NG_FL4G}
 
-Damn am I good or what :) (Read other writeups if you want to know what this chall does) (Also prepare for like 2 more writeups where CHAT just chatted :))))))))))))
+(Read other writeups if you want to know what this chall does) (Also prepare for like 2 more writeups where CHAT did most of the work)
