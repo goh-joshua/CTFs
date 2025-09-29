@@ -14,7 +14,7 @@ virus_vault.zip
 
 ---
 
-In the unzip challenge file was the source code of the website and it was written in php?
+In the unzip challenge file were the source code of the website and it was written in php?
 
 Now it was finally time to download php on my wsl.
 
@@ -25,7 +25,7 @@ sudo apt install php
 
 Okay, time to look at the files.
 
-Since it has my first time with php I only asked CHAT about where I should start and it identified some part of index.php which were sus
+Since it was my first time with php I only asked CHAT about where I should start and it identified some part of index.php which were sus
 
 ```php
 ...
@@ -39,9 +39,9 @@ return unserialize($row['virus']);
 ...
 ```
 
-Now with Googling, I found this [video](https://www.youtube.com/watch?v=PVdOSpF4Tl0) which shows possible RCE when there is an "include" in the code by injecting a php filter encoded payload.
+Now with Googling, I found this [video](https://www.youtube.com/watch?v=PVdOSpF4Tl0) which shows possible RCE by injecting a php filter encoded payload when there is an "include" in the code.
 
-This seems to best possibility to me as the FLAG is in the environment so if I could somehow run <?=getenv('FLAG'); ?>, that would be ggwp.
+This seems to best possibility to me as the FLAG is in the environment so if I could somehow run &lt;?=getenv('FLAG'); ?&gt;, that would be ggwp.
 
 So I found some [encoder tool on github](https://github.com/synacktiv/php_filter_chain_generator) and downloaded it.
 
@@ -81,7 +81,7 @@ Okay, payload done. Now how do I make the species unserialize into my payload?
 
 Now this is where I play around with php for the first time!!!
 
-After Googling about I learnt that for special characters like ±, they are represented by 2 bytes, and when converted from ISO-8859-1 to UTF-8 some of them expand to 4 bytes characters, 
+After Googling, I learnt that for special characters like ±, they are represented by 2 bytes, and when converted from UTF-8 to ISO-8859-1, some of them expand to 4 byte characters, 
 for example "±" becomes "Â±" which is 4 bytes
 
 ```php
@@ -89,7 +89,7 @@ $test = mb_convert_encoding("±", 'UTF-8', 'ISO-8859-1');
 echo "$test\n"; // Â±
 ```
 
-And for how we can use this, I also found out how the way serialize and unserialize in php works is that it counts the bytes of the charcters when serializing so for example
+And for how we can use this, I also found out the way serialize and unserialize in php works is that it counts the bytes of the charcters when serializing so for example
 
 ```php
 $testser = serialize("±");
@@ -106,11 +106,11 @@ echo "$testcon\n";
 ```
 will give us 's:2:"Â±";'
 
-So for an example properly serialize virus will look something like 
+So for example, a properly serialize virus will look something like 
 ```code
 O:5:"Virus":3:{s:4:"name";s:10:"SpectreLLM";s:7:"species";s:9:"Ghostroot";s:13:"valid_species";a:4:{i:0;s:9:"Ghostroot";i:1;s:9:"IronHydra";i:2;s:11:"DarkFurnace";i:3;s:9:"Voltspike";}}
 ```
-And the way unserialize work in my understanding that as long as the numbers make the sense everything at the back will be ignored. So something like
+And the way unserialize works in my understanding is that as long as the numbers makes sense everything at the back will be ignored. So something like
 ```
 O:5:"Virus":3:{s:4:"name";s:10:"SpectreLLM";s:7:"species";s:9:"Ghostroot";s:13:"valid_species";a:4:{i:0;s:9:"Ghostroot";i:1;s:9:"IronHydra";i:2;s:11:"DarkFurnace";i:3;s:9:"Voltspike";}}{Insert_Something_Funny_Here}
 ```
@@ -118,7 +118,7 @@ will still unserialize.
 
 So now we get constructing
 
-So first we get the length of our encoded filter payload abnd mine was 4302, and since we are injecting into the name of the virus, the serialized virus will look like
+So first we get the length of our encoded filter payload, mine was 4302, and since we are injecting into the name of the virus, the serialized virus will look like
 ```
 O:5:"Virus":3:{s:4:"name";s:length_in_bytes(total_payload):" stuff";s:7:"species";s:4302:"<filter_payload>";s:13:"valid_species";a:4:{i:0;s:9:"Ghostroot";i:1;s:9:"IronHydra";i:2;s:11:"DarkFurnace";i:3;s:9:"Voltspike";}} ";s:7:"species";s:9:"Ghostroot";s:13:"valid_species";a:4:{i:0;s:9:"Ghostroot";i:1;s:9:"IronHydra";i:2;s:11:"DarkFurnace";i:3;s:9:"Voltspike";}}
 ```
@@ -140,7 +140,7 @@ So how do we know how much "±"s to add, well, we can use this complex formula
 4*n = 2*n + 4439 //where n is number of "±"s
 ```
 
-Oh noes but 4439 is odd, its fine we can add "?" to the end of our filter_payload and it will still work.
+Oh noes but 4439 is odd, its fine we can add "?" to the end of our filter_payload and increase the number in our payload to 4303 and it will still work.
 
 So we now solve for 
 
