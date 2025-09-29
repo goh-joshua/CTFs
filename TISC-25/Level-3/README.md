@@ -126,7 +126,7 @@ G0 X9.642865825137045e-39 Y9.55104854585909e-39
 G0 X1.0469388093155895e-38 Y1.401298464324817e-44
 ```
 
-These instructions were repeated multiple times but make no sense as the number were too precise and small and are usually ignored but an actual 3D printer.
+These instructions were repeated multiple times but make no sense as the number were too precise and small and are usually ignored by an actual 3D printer.
 
 Forgetting that I had learned about IEEE numbers in CS2100, I googled the numbers and found out what they were.
 
