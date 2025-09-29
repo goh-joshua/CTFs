@@ -103,8 +103,8 @@ tok.send();
 But i faced an issue where the token went out of bounds 
 
 <img width="976" height="80" alt="image" src="https://github.com/user-attachments/assets/1938887c-1fec-4c0a-8e32-08819cd5dc3c" />
-so I changed the font size to 1px with 
 
+so I changed the font size to 1px with 
 
 ```
 document.write('<style>body{font-size:1px}</style>' + this.responseText);
