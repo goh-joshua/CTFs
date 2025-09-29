@@ -117,7 +117,12 @@ Now it was finally time to download aws on my powershell.
 
 So I set my keys with aws configure in powershell and I followed this [website](https://medium.com/legionhunters/hacking-the-cloud-unveiling-secrets-in-aws-ctf-challenges-5edc9259688c) and copied their commands they used in a challenge and prayed they work.
 
-After trying a bunch of commands, secretsmanager list-secrets worked
+After trying a bunch of commands, 
+
+```
+aws secretsmanager list-secrets
+```
+worked and gave me
 
 ```
 {
