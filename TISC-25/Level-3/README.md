@@ -132,7 +132,7 @@ Forgetting that I had learned about IEEE numbers in CS2100, I googled the number
 
 Since IEEE is 32 bits and all the numbers used in the text always had 0s in their first and third 8 bits, clearly the second and fourth 8 bits represent letters.
 
-```
+```python
 text = """G0 X7.989824091696275e-39 Y9.275539254788188e-39
 G0 X7.989832499487061e-39 Y9.642842003063152e-39
 G0 X5.14285644847226e-39 Y1.0928530541484243e-38
@@ -261,7 +261,7 @@ print("".join(l))
 
 After running the above code, you get get more code!
 
-```
+```python
 aWnegWRi18LwQXnXgxqEF}blhs6G2cVU_hOz3BEM2{fjTb4BI4VEovv8kISWcks4
 def rot_rot(plain, key):
         charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789{}_"
@@ -277,7 +277,7 @@ def rot_rot(plain, key):
 
 And this is just a rotating rot cipher so you run more code and bruteforce the flag!
 
-```
+```python
 ct = "aWnegWRi18LwQXnXgxqEF}blhs6G2cVU_hOz3BEM2{fjTb4BI4VEovv8kISWcks4"
 def rot_rot(plain, key):
         charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789{}_"
@@ -294,7 +294,7 @@ for i in range(len("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567
         print(rot_rot(ct, i))
 ```
 
-And eventually you get the flag TISC{thr33_d33_pr1n71n9_15_FuN_4c3d74845bc30de033f2e7706b585456}.
+And eventually you get the flag.
 
 Flag: TISC{thr33_d33_pr1n71n9_15_FuN_4c3d74845bc30de033f2e7706b585456}
 
