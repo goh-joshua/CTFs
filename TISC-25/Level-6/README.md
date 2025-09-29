@@ -30,7 +30,7 @@ After logining we see this dashboard:
 
 Clearly we have to be admin somehow, so clearly I asked chat.
 
-It then told me I had to override the /app.js the website uses (duh)
+It then told me I had to override the /app.js the website uses. (duh)
 
 And after much prompts it finally gave me a app.js file that when used to override, allowed me to login as admin.
 
@@ -127,4 +127,4 @@ We are now jacked in as admin and can access the admin dashboard. On the dashboa
 
 FLAG: TISC{p4ssk3y_is_gr3a7_t|sC}
 
-Damn am I good or what :) (Read other writeups if you want to know what this chall does) (Also prepare for like 1 more writeup where CHAT just chatted :))))))))))))
+(Read other writeups if you want to know what this chall does) (Also prepare for like 1 more writeup where CHAT did most of the work)
