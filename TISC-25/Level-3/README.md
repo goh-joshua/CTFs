@@ -8,7 +8,7 @@ rotary-precision.txt
 
 ---
 
-So this rotary-precision.txt file is 14MB and it seems to be G-code after using Google.
+So this rotary-precision.txt file is 14MB and it seems to be G-code after some Googling.
 
 So I placed it into a G-Code renderer, and wasted alot of time looking at the model.
 
