@@ -14,7 +14,7 @@ virus_vault.zip
 
 ---
 
-In the unzip challenge file were the source code of the website and it was written in php?
+In the unziped challenge file were the source code of the website and it was written in php?
 
 Now it was finally time to download php on my wsl.
 
