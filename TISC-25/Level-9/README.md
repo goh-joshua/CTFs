@@ -91,6 +91,6 @@ Checking...
 TISC{3mul4t3d_uC_pwn3d}
 ```
 
-FLAG: TISC{3mul4t3d_uC_pwn3d} (
+FLAG: TISC{3mul4t3d_uC_pwn3d}
 
 (Okay, final challenge where CHAT did most of the thinking, once again read another write up for a better understanding of this challenge)
