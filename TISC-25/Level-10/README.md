@@ -913,7 +913,7 @@ this gives us
 [[152, 'div', 2, 76], [76, 'plus', 1007, 1083], [1083, 'minus', 11, 1072], [34, 'plus', 1072, 1106], [4, 'mul', 1106, 4424], [1, 'plus', 4424, 4425]]
 ```
 
-And we are now able to get OTPs, no we just do this twice and then...
+And we are now able to get OTPs, now we just do this twice and then...
 
 <img width="1077" height="728" alt="image" src="https://github.com/user-attachments/assets/65aa886c-1964-4b90-a80f-875a494b2e39" />
 
